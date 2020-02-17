@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>CodeGen</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<div id="CodeGen"><h1 id="CodeGen" class="header"><a href="#CodeGen">CodeGen</a></h1></div>
+<ul>
+<li>
+"The two pieces of the LLVM code generator are the high-level interface to the
+  code generator and the set of reusable components that can be used to build
+  target-specific backends."
+
+</ul>
+
+<p>
+<span id="CodeGen-Code generation model for standard register-based microprocessors"></span><strong id="Code generation model for standard register-based microprocessors">Code generation model for standard register-based microprocessors</strong>
+</p>
+
+<ol>
+<li>
+Instruction Selection — Turn IR into <em>DAG</em> of target instructions. † Directed
+   acyclic graph is a graph without circle.
+
+<li>
+<span class="todo">TODO</span>: Complete the reset of the steps
+
+</ol>
+
+<div id="CodeGen-Target description classes"><h2 id="Target description classes" class="header"><a href="#CodeGen-Target description classes">Target description classes</a></h2></div>
+<ul>
+<li>
+Under include/llvm/Target
+
+<li>
+Describes target machine
+
+<li>
+Using TableGen to generate target description classes.
+
+<li>
+Subclassed by the concerte tagget implementation.
+
+</ul>
+
+<p>
+Only TargetMachine and DataLayout classes are requred to be define for a
+backend to fit into the LLVM system.
+</p>
+
+<p>
+<span class="todo">TODO</span>: Learn about TableGen
+</p>
+
+<div id="CodeGen-Machine code description classes"><h2 id="Machine code description classes" class="header"><a href="#CodeGen-Machine code description classes">Machine code description classes</a></h2></div>
+<ul>
+<li>
+Under include/llvm/CodeGen
+
+<li>
+Generic to any target machine
+
+<li>
+Has concepts like "constant pool entires" and "jump tables" which are above
+  assembly level
+
+</ul>
+
+<p>
+Target machine instructions are represented as an instance of the MachineInstr
+class. It's extremely abstract and only keeps track of an opcode number and a
+set of operands. 
+</p>
+
+<p>
+The opcode only has meaning to a specific backend. Instructions are defined in
+the *InstrInfo.td (HexagonInstrInfo.td)
+</p>
+
+<div id="CodeGen-&quot;MC&quot; Layer"><h2 id="&quot;MC&quot; Layer" class="header"><a href="#CodeGen-&quot;MC&quot; Layer">"MC" Layer</a></h2></div>
+<ul>
+<li>
+Represents assembly level constructs which <span id="CodeGen-&quot;MC&quot; Layer-is"></span><strong id="is">is</strong> specific to target machine
+
+<li>
+IR -&gt; MCStreamer -&gt; assembly
+
+</ul>
+
+<p>
+<span id="CodeGen-&quot;MC&quot; Layer-MCinst"></span><strong id="MCinst">MCinst</strong>
+</p>
+
+</body>
+</html>
