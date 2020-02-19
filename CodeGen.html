@@ -7,7 +7,13 @@
 </head>
 <body>
 
+<p>
+<span class="todo">TODO</span>: A bottom up approach might be more efficient since the top level of the
+framework is too abstract to grasp.
+</p>
+
 <div id="CodeGen"><h1 id="CodeGen" class="header"><a href="#CodeGen">CodeGen</a></h1></div>
+
 <ul>
 <li>
 "The two pieces of the LLVM code generator are the high-level interface to the
@@ -23,7 +29,7 @@
 <ol>
 <li>
 Instruction Selection — Turn IR into <em>DAG</em> of target instructions. † Directed
-   acyclic graph is a graph without circle.
+   acyclic graph is a graph without circle
 
 <li>
 <span class="todo">TODO</span>: Complete the reset of the steps
@@ -76,14 +82,20 @@ set of operands.
 </p>
 
 <p>
+<span id="CodeGen-Machine code description classes-McahineInstr class"></span><strong id="McahineInstr class">McahineInstr class</strong>
 The opcode only has meaning to a specific backend. Instructions are defined in
 the *InstrInfo.td (HexagonInstrInfo.td)
 </p>
 
-<div id="CodeGen-&quot;MC&quot; Layer"><h2 id="&quot;MC&quot; Layer" class="header"><a href="#CodeGen-&quot;MC&quot; Layer">"MC" Layer</a></h2></div>
+<p>
+<span class="todo">TODO</span>: Too abstract to understand for now, come back later once you finish MC
+layer.
+</p>
+
+<div id="CodeGen-Machine code description classes-&quot;MC&quot; Layer"><h3 id="&quot;MC&quot; Layer" class="header"><a href="#CodeGen-Machine code description classes-&quot;MC&quot; Layer">"MC" Layer</a></h3></div>
 <ul>
 <li>
-Represents assembly level constructs which <span id="CodeGen-&quot;MC&quot; Layer-is"></span><strong id="is">is</strong> specific to target machine
+Represents assembly level constructs which <span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-is"></span><strong id="is">is</strong> specific to target machine
 
 <li>
 IR -&gt; MCStreamer -&gt; assembly
@@ -91,7 +103,50 @@ IR -&gt; MCStreamer -&gt; assembly
 </ul>
 
 <p>
-<span id="CodeGen-&quot;MC&quot; Layer-MCinst"></span><strong id="MCinst">MCinst</strong>
+<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCStreamer"></span><strong id="MCStreamer">MCStreamer</strong>
+</p>
+<ul>
+<li>
+Abstract assembler API
+
+<li>
+Directly corresponds to what we see in a .s file and implemented in differnt
+  ways (e.g. to ouput a .s file, output and ELF.o file etc)
+
+<li>
+One method per directive (e.g EmitLabel, SwitchSection, EmitValue(for .byte,
+  .word), etc, which directly correspond to assembly level directives.
+
+</ul>
+
+<p>
+LLVM IR and Machine* constructs are lowered down to the MC layer, emitting
+directives through MCStreamer.
+</p>
+
+<p>
+MCAsmStreamer (for .s file) prints out directive for each method.
+MCObjectStreamer implements a full assembler.
+</p>
+
+<p>
+MCtargetStreamer is for target specific directives.
+</p>
+
+<p>
+"To make llvm use these classes, the target initialization must call
+TargetRegistry::RegisterAsmStreamer and TargetRegistry::RegisterMCObjectStreamer
+passing callbacks that allocate the corresponding target streamer and pass it to
+createAsmStreamer or to the appropriate object streamer constructor."
+</p>
+
+<p>
+<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCContext"></span><strong id="MCContext">MCContext</strong>
+</p>
+
+
+<p>
+<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCinst"></span><strong id="MCinst">MCinst</strong>
 </p>
 
 </body>
