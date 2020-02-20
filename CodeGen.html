@@ -62,12 +62,17 @@ backend to fit into the LLVM system.
 </p>
 
 <div id="CodeGen-Machine code description classes"><h2 id="Machine code description classes" class="header"><a href="#CodeGen-Machine code description classes">Machine code description classes</a></h2></div>
+<p>
+<span class="todo">TODO</span>: What is the relationship between theses classes and llvm IR?, still too
+abstract to understand.
+</p>
+
 <ul>
 <li>
 Under include/llvm/CodeGen
 
 <li>
-Generic to any target machine
+<em>Agnostic</em> to any target machine
 
 <li>
 Has concepts like "constant pool entires" and "jump tables" which are above
@@ -87,12 +92,10 @@ The opcode only has meaning to a specific backend. Instructions are defined in
 the *InstrInfo.td (HexagonInstrInfo.td)
 </p>
 
-<p>
-<span class="todo">TODO</span>: Too abstract to understand for now, come back later once you finish MC
-layer.
-</p>
-
 <div id="CodeGen-Machine code description classes-&quot;MC&quot; Layer"><h3 id="&quot;MC&quot; Layer" class="header"><a href="#CodeGen-Machine code description classes-&quot;MC&quot; Layer">"MC" Layer</a></h3></div>
+<p>
+Think it as of a assembly writing API 
+</p>
 <ul>
 <li>
 Represents assembly level constructs which <span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-is"></span><strong id="is">is</strong> specific to target machine
@@ -141,13 +144,57 @@ createAsmStreamer or to the appropriate object streamer constructor."
 </p>
 
 <p>
-<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCContext"></span><strong id="MCContext">MCContext</strong>
+<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCContext"></span><strong id="MCContext">MCContext</strong> class
 </p>
+<ul>
+<li>
+Owner of data structures at the MC layer corresponds to symbols, sections,
+  etc.
 
+<li>
+Used to create symbols and sections.
+
+</ul>
 
 <p>
-<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCinst"></span><strong id="MCinst">MCinst</strong>
+<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCSymbol"></span><strong id="MCSymbol">MCSymbol</strong> class
 </p>
+<ul>
+<li>
+Represent assembly label
+
+<li>
+Created by MCContext and unique
+
+</ul>
+
+<p>
+*MCSection class
+</p>
+<ul>
+<li>
+Represent object file section
+
+<li>
+Subclassed by specific object file implementation
+
+</ul>
+
+<p>
+<span id="CodeGen-Machine code description classes-&quot;MC&quot; Layer-MCInst"></span><strong id="MCInst">MCInst</strong> class
+</p>
+<ul>
+<li>
+Represent instructions
+
+<li>
+Holds opcode and a vector of MCOperands
+
+<li>
+MCOperands is a union of three cases: 1) immediate, 2) register ID, 3)
+  symbolic expression (e.g. "Lfoo-Lbar+42") as MCExpr
+
+</ul>
 
 </body>
 </html>
