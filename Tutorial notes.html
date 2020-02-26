@@ -21,13 +21,22 @@ their CPUs
 </p>
 
 <p>
-Searc tricore-llvm.pdf for an good introduction on codegen
+Search tricore-llvm.pdf for an good introduction on codegen
 </p>
 
+<p>
+clang --target=hexagon -emit-llvm -c main.c for bitcode, add -S for assembly
+then we can use llvm-mc on the assembly code to generate bitcode.
+</p>
 
 <p>
-llc -march=Hexagon -debug-pass=Structure *.bc shows the code geneartion
+llc -march=Hexagon -debug-pass=Structure *.bc shows the code generation
 sequence.
+</p>
+
+<p>
+Hexagon instruction are categorized into classes to determine what combinations
+of instructions can be written in parallel
 </p>
 
 </body>
