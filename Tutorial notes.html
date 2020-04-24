@@ -13,20 +13,13 @@ Notes for <a href="http://jonathan2251.github.io/lbd/about.html">http://jonathan
 
 <p>
 Learn to create an LLVM Backend so I can better understand Hexagon Backend.
-</p>
-
-<p>
-.td files define the transformation for llvm IR and the machine instructions of
-their CPUs
-</p>
-
-<p>
 Search tricore-llvm.pdf for an good introduction on codegen
 </p>
 
 <p>
-clang --target=hexagon -emit-llvm -c main.c for bitcode, add -S for assembly
-then we can use llvm-mc on the assembly code to generate bitcode.
+clang --target=hexagon -emit-llvm -c main.c generates IR bitcode file.
+clang --target=hexagon -S main.c generates Hexagon assembly code.
+clang --target=hexagon -S -emit-llvm -c main.c generates IR code.
 </p>
 
 <p>
@@ -40,7 +33,8 @@ of instructions can be written in parallel
 </p>
 
 <p>
-Looking at Hexagon.td and its includes. Learning about tablegen
+.td files define the transformation for llvm IR and the machine instructions of
+their CPUs
 </p>
 
 <p>
