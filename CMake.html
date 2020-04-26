@@ -7,13 +7,31 @@
 </head>
 <body>
 
+<div id="Building steps"><h2 id="Building steps" class="header"><a href="#Building steps">Building steps</a></h2></div>
+<ol>
+<li>
+Clone the repo: git clone <a href="https://github.com/llvm/llvm-project.git">https://github.com/llvm/llvm-project.git</a>
+
+<li>
+Create a build directory under the root of llvm-project then cd into it
+
+<li>
+Proceed with: cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS='clang'
+   -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon ../llvm
+
+<li>
+Run make in the terminal
+
+</ol>
+
+<div id="Useful options to reduce compile time"><h2 id="Useful options to reduce compile time" class="header"><a href="#Useful options to reduce compile time">Useful options to reduce compile time</a></h2></div>
 <p>
-Useful option to reduce compile time.
 LLVM_TARGETS_TO_BUILD:STRING
 </p>
 <blockquote>
 Semicolon-separated list of targets to build, or all for building all 
-targets. Case-sensitive. Defaults to <em>all</em>. Example:
+targets. Case-sensitive. Defaults to <em>all</em>. <br>
+Example:
 -DLLVM_TARGETS_TO_BUILD="X86;PowerPC".
 </blockquote>
 

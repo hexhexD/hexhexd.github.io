@@ -7,25 +7,56 @@
 </head>
 <body>
 
-<p>
-HexagonAsmParser
-It inherits from MCTargetAsmParser which has
-MatchAndEmitInstruction function to be called for instruction parsing and
-emitting.
-</p>
+<div id="Reading list"><h2 id="Reading list" class="header"><a href="#Reading list">Reading list</a></h2></div>
+<ul>
+<li>
+LLVM assembler basics
 
+<ul>
+<li>
+<a href="https://www.embecosm.com/appnotes/ean10/ean10-howto-llvmas-1.0.html#idp86952">https://www.embecosm.com/appnotes/ean10/ean10-howto-llvmas-1.0.html#idp86952</a>
+
+</ul>
+<li>
+Assembler Relaxation and fragments
+
+<ul>
+<li>
+<a href="https://eli.thegreenplace.net/2013/01/03/assembler-relaxation#id4">https://eli.thegreenplace.net/2013/01/03/assembler-relaxation#id4</a>
+
+</ul>
+<li>
+Hexagon Assembler overview
+
+<ul>
+<li>
+Check out Section 3 of Qualcommm Hexagon Utilities User Guide which is
+      located in Hexagon Document Bundle that came with Hexagon SDK
+
+<li>
+Section 3.6 describes vairous directives e.g. .falign
+
+</ul>
+</ul>
+
+<div id="Classes and functions"><h2 id="Classes and functions" class="header"><a href="#Classes and functions">Classes and functions</a></h2></div>
 <p>
-HexagonOperand
+<span id="Classes and functions-HexagonAsmParser"></span><strong id="HexagonAsmParser">HexagonAsmParser</strong>
 </p>
 <ul>
 <li>
-Represents a parsed instruction storing types and contents of its
+It inherits from MCTargetAsmParser which has MatchAndEmitInstruction function 
+  to be called for instruction parsing and emitting.
 
 </ul>
+
 <p>
-operands.
+<span id="Classes and functions-HexagonOperand"></span><strong id="HexagonOperand">HexagonOperand</strong>
 </p>
 <ul>
+<li>
+Represents a parsed instruction storing types and contents of its operands.
+
 <li>
 Corresponds to OperandVector parameter in MatchAndEmitInstruction function
 

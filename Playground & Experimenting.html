@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Playground %title% Experimenting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<div id="Assembler"><h2 id="Assembler" class="header"><a href="#Assembler">Assembler</a></h2></div>
+<p>
+llvm-mc -assemble -arch=hexagon -debug main.s &gt; log 2&gt;&amp;1
+</p>
+<blockquote>
+Must be using debug build otherwise -debug flag wil be ignored
+</blockquote>
+
+<div id="Other"><h2 id="Other" class="header"><a href="#Other">Other</a></h2></div>
+<p>
+clang --target=hexagon -emit-llvm -c main.c generates IR bitcode file. clang
+--target=hexagon -S main.c generates Hexagon assembly code. clang
+--target=hexagon -S -emit-llvm -c main.c generates IR code.
+</p>
+
+<p>
+llc -march=Hexagon -debug-pass=Structure *.bc shows the code generation
+sequence.
+</p>
+
+<p>
+Hexagon instruction are categorized into classes to determine what combinations
+of instructions can be written in parallel
+</p>
+
+<p>
+.td files define the transformation for llvm IR and the machine instructions of
+their CPUs
+</p>
+
+<p>
+In HexagonRegisterinfo.td the HexagonReg class is defined with 5 bits to
+represent number so matches with 32 registers in the architecture 
+</p>
+
+</body>
+</html>
