@@ -16,11 +16,15 @@ Clone the repo: git clone <a href="https://github.com/llvm/llvm-project.git">htt
 Create a build directory under the root of llvm-project then cd into it
 
 <li>
-Proceed with: cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS='clang'
-   -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon ../llvm
+Proceed with: <br>
+   cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS='clang'
+   -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon
+   -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
+   -DBUILD_SHARED_LIBS=True -DLLVM_CCACHE_BUILD=True -DLLVM_USE_SPLIT_DWARF=True
+   ../llvm
 
 <li>
-Run make in the terminal
+Run ninja in the terminal
 
 </ol>
 
@@ -33,6 +37,25 @@ Semicolon-separated list of targets to build, or all for building all
 targets. Case-sensitive. Defaults to <em>all</em>. <br>
 Example:
 -DLLVM_TARGETS_TO_BUILD="X86;PowerPC".
+</blockquote>
+
+<p>
+BUILD_SHARED_LIBS:BOOL
+</p>
+<blockquote>
+As this will reduce re-linking all the objects into all the executables. This
+will reduce the number of steps and freezing.
+</blockquote>
+
+<p>
+LLVM_CCACHE_BUILD:BOOL
+</p>
+
+<p>
+LLVM_USE_SPLIT_DWARF:BOOL
+</p>
+<blockquote>
+<a href="https://www.productive-cpp.com/improving-cpp-builds-with-split-dwarf/">https://www.productive-cpp.com/improving-cpp-builds-with-split-dwarf/</a>
 </blockquote>
 
 </body>
