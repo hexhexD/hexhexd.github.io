@@ -12,15 +12,57 @@
 llvm-mc -assemble -arch=hexagon -debug main.s &gt; log 2&gt;&amp;1
 </p>
 <blockquote>
+Show debug output <br>
 Must be using debug build otherwise -debug flag wil be ignored
 </blockquote>
 
+<p>
+llc --asm-show-inst main.ll
+</p>
+<blockquote>
+Emit internal instruction representation to assembly file
+</blockquote>
+<pre asm>
+{
+        call printf
+}                               // &lt;MCInst #17 BUNDLE
+                                //  &lt;MCOperand Imm:0&gt;
+                                //  &lt;MCOperand Inst:(&lt;MCInst 1145 &lt;MCOperand Expr:(printf)&gt;&gt;)&gt;&gt;
+</pre>
+
+<p>
+echo "r0 = #14" | llvm-mc -arch=hexagon -show-encoding -show-inst
+</p>
+<blockquote>
+Show instruction encodings <br>
+Show internal instruction representation
+</blockquote>
+<pre asm>
+.text
+{
+        r0 = #14
+}                               // encoding: [0xc0,0xc1,0x00,0x78]
+                                // &lt;MCInst #17 BUNDLE
+                                //  &lt;MCOperand Imm:0&gt;
+                                //  &lt;MCOperand Inst:(&lt;MCInst 854 &lt;MCOperand Reg:83&gt; &lt;MCOperand Expr:(14)&gt;&gt;)&gt;&gt;
+</pre>
+
+
+
+
 <div id="Other"><h2 id="Other" class="header"><a href="#Other">Other</a></h2></div>
 <p>
-clang --target=hexagon -emit-llvm -c main.c generates IR bitcode file. clang
---target=hexagon -S main.c generates Hexagon assembly code. clang
---target=hexagon -S -emit-llvm -c main.c generates IR code.
+clang --target=hexagon -emit-llvm -c main.c generates IR bitcode file.
 </p>
+
+<p>
+clang --target=hexagon -S -emit-llvm -c main.c generates IR code.
+</p>
+
+<p>
+clang --target=hexagon -S main.c generates Hexagon assembly code. 
+</p>
+
 
 <p>
 llc -march=Hexagon -debug-pass=Structure *.bc shows the code generation

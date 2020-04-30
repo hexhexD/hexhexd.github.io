@@ -53,9 +53,15 @@ Section 3.6 describes vairous directives e.g. .falign
 </p>
 <ul>
 <li>
-It inherits from MCTargetAsmParser which has MatchAndEmitInstruction function 
+It inherits from MCTargetAsmParser which has <span id="Classes and functions-MatchAndEmitInstruction"></span><strong id="MatchAndEmitInstruction">MatchAndEmitInstruction</strong> function 
   to be called for instruction parsing and emitting.
 
+<ol>
+<li>
+MatchAndEmitInstruction first checks if the current line is already in a
+       packet
+
+</ol>
 </ul>
 
 <p>
@@ -63,12 +69,21 @@ It inherits from MCTargetAsmParser which has MatchAndEmitInstruction function
 </p>
 <ul>
 <li>
+Must be defined before instruction matcher can be created
+
+<li>
 Represents a parsed instruction storing types and contents of its operands.
 
 <li>
 Corresponds to OperandVector parameter in MatchAndEmitInstruction function
 
 </ul>
+
+
+
+<p>
+Why do MCB.addOperand(MCOperand::createImm(0)); if we are already in a packet?
+</p>
 
 </body>
 </html>
