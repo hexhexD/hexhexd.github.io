@@ -17,10 +17,12 @@ Create a build directory under the root of llvm-project then cd into it
 
 <li>
 Proceed with: <br>
-   cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS='clang'
+   cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS="clang"
    -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon
    -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
    -DBUILD_SHARED_LIBS=True -DLLVM_CCACHE_BUILD=True -DLLVM_USE_SPLIT_DWARF=True
+   -DCMAKE_EXE_LINKER_FLAGS=-Wl,--gdb-index
+   -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--gdb-index
    ../llvm
 
 <li>
