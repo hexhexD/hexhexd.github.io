@@ -21,6 +21,7 @@ Proceed with: <br>
    -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon
    -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
    -DBUILD_SHARED_LIBS=True -DLLVM_CCACHE_BUILD=True -DLLVM_USE_SPLIT_DWARF=True
+   -DLLVM_USE_LINKER=lld
    -DCMAKE_EXE_LINKER_FLAGS=-Wl,--gdb-index
    -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--gdb-index
    ../llvm
@@ -36,7 +37,14 @@ HexagonAsmParser.cpp only takes about 36s to rebuild comparing to 20min without
 using ninja and options listed below.
 </p>
 
-<div id="Useful options to reduce compile time"><h2 id="Useful options to reduce compile time" class="header"><a href="#Useful options to reduce compile time">Useful options to reduce compile time</a></h2></div>
+<div id="Useful options to reduce build time"><h2 id="Useful options to reduce build time" class="header"><a href="#Useful options to reduce build time">Useful options to reduce build time</a></h2></div>
+<p>
+LLVM_USE_LINKER=lld
+</p>
+<blockquote>
+lld is much faster than ld in our case
+</blockquote>
+
 <p>
 LLVM_TARGETS_TO_BUILD:STRING
 </p>
