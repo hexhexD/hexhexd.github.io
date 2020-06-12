@@ -49,25 +49,40 @@ Section 3.6 describes vairous directives e.g. .falign
 </ul>
 
 <div id="Classes and functions"><h2 id="Classes and functions" class="header"><a href="#Classes and functions">Classes and functions</a></h2></div>
+
+<div id="Classes and functions-HexagonAsmParser"><h4 id="HexagonAsmParser" class="header"><a href="#Classes and functions-HexagonAsmParser">HexagonAsmParser</a></h4></div>
 <p>
-<span id="Classes and functions-HexagonAsmParser"></span><strong id="HexagonAsmParser">HexagonAsmParser</strong>
+It's important to know that our HexagonAsmParser deals with valid tokens that
+are already parsed by AsmParser::parseStatement where our
+MatchAndEmitInstruction is called to do further matching.
 </p>
-<ul>
-<li>
-It inherits from MCTargetAsmParser which has <span id="Classes and functions-MatchAndEmitInstruction"></span><strong id="MatchAndEmitInstruction">MatchAndEmitInstruction</strong> function 
-  to be called for instruction parsing and emitting.
+
+
+<div id="Classes and functions-HexagonAsmParser::MatchAndEmitInstruction"><h3 id="HexagonAsmParser::MatchAndEmitInstruction" class="header"><a href="#Classes and functions-HexagonAsmParser::MatchAndEmitInstruction">HexagonAsmParser::MatchAndEmitInstruction</a></h3></div>
+<p>
+This function is invoked in AsmParser::parseStatement which does intial parsing
+and put parserd HexagonOperand in the <span id="Classes and functions-HexagonAsmParser::MatchAndEmitInstruction-Operands"></span><strong id="Operands">Operands</strong> parameter of our function.
+So it means we are only dealing with valid tokens.
+</p>
 
 <ol>
 <li>
+It inherits from MCTargetAsmParser which has MatchAndEmitInstruction function 
+   to be called for instruction parsing and emitting.
+
+<li>
+This returns false on success and returns true on failure to match. (What?)
+
+<li>
 MatchAndEmitInstruction first checks if the current line is already in a
-       packet
+   packet
+
+<li>
+Then it calls matchOneInstruction when it first encounter a valid
 
 </ol>
-</ul>
 
-<p>
-<span id="Classes and functions-HexagonOperand"></span><strong id="HexagonOperand">HexagonOperand</strong>
-</p>
+<div id="Classes and functions-HexagonOperand"><h3 id="HexagonOperand" class="header"><a href="#Classes and functions-HexagonOperand">HexagonOperand</a></h3></div>
 <ul>
 <li>
 Must be defined before instruction matcher can be created
