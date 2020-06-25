@@ -71,16 +71,37 @@ It inherits from MCTargetAsmParser which has MatchAndEmitInstruction function
    to be called for instruction parsing and emitting.
 
 <li>
-This returns false on success and returns true on failure to match. (What?)
+This returns false on success and returns true on failure to match. Matching
+   Linux main return 0 on success.
 
 <li>
 MatchAndEmitInstruction first checks if the current line is already in a
    packet
 
 <li>
-Then it calls matchOneInstruction when it first encounter a valid token
+Adds a 0 Immeidate into the MCB when we first enter the packet, maybe it's
+   used to denote we that this MCB is holding a packet
+
+<li>
+Makes a new MCInst
+
+<li>
+Then it calls matchOneInstruction with the new MCInst as the output parameter
+   when it first encounter a valid token
+
+<li>
+MCB.addOperand(MCOperand::createInst(SubInst)); ?
+   MCB holds all the instruction in our packet(bundle) represented 
+   as a Inst type of MCOperand
+
+<li>
+Call matchBundleOptions and finishBundle when we are at the closing bracket.
+
+<li>
+In the situation of single instruction, finishBundle is called.
 
 </ol>
+
 
 <div id="Classes and functions-HexagonOperand"><h3 id="HexagonOperand" class="header"><a href="#Classes and functions-HexagonOperand">HexagonOperand</a></h3></div>
 <ul>
@@ -91,14 +112,17 @@ Must be defined before instruction matcher can be created
 Represents a parsed instruction storing types and contents of its operands.
 
 <li>
-Corresponds to OperandVector parameter in MatchAndEmitInstruction function
+Corresponds to Operands parameter in MatchAndEmitInstruction function
 
 </ul>
 
 
-
 <p>
 Why do MCB.addOperand(MCOperand::createImm(0)); if we are already in a packet?
+</p>
+
+<p>
+opcode is not used?
 </p>
 
 </body>
