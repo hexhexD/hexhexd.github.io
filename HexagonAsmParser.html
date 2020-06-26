@@ -91,17 +91,23 @@ Then it calls matchOneInstruction with the new MCInst as the output parameter
 
 <li>
 MCB.addOperand(MCOperand::createInst(SubInst)); ?
-   MCB holds all the instruction in our packet(bundle) represented 
+   MCB holds all the instructions in our packet(bundle) represented
    as a Inst type of MCOperand
 
 <li>
 Call matchBundleOptions and finishBundle when we are at the closing bracket.
 
 <li>
-In the situation of single instruction, finishBundle is called.
+In the situation of single instruction, only finishBundle is called.
 
 </ol>
 
+<div id="Classes and functions-HexagonAsmParser::finishBundle"><h3 id="HexagonAsmParser::finishBundle" class="header"><a href="#Classes and functions-HexagonAsmParser::finishBundle">HexagonAsmParser::finishBundle</a></h3></div>
+<p>
+Prepare MCInstrInfo, MCSubtargetInfo, MCContext, and a new HexagonMCChecker object
+to pass to HexagonMCInstrInfo::canonicalizePacket. Emit instruction if everything is
+okay.
+</p>
 
 <div id="Classes and functions-HexagonOperand"><h3 id="HexagonOperand" class="header"><a href="#Classes and functions-HexagonOperand">HexagonOperand</a></h3></div>
 <ul>
