@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Fuzzing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="Sandsifter"><h1 id="Sandsifter" class="header"><a href="#Sandsifter">Sandsifter</a></h1></div>
+
+<ul>
+<li>
+Instruction length varies. Hexagon has sub-insturctions, duplex, packets.
+
+<li>
+Determine length of an arbitrary insturction using page fault.
+
+<li>
+Cover all kinds of instructions includes kernel, hypervisor, or system
+  management code. Using esceptions.
+
+<li>
+Using #UD to filter out undefined opcode.
+
+<li>
+Protect processor state while fuzzing. We dont want it to crash. Hook
+  exeception handler to restore fuzzer to a good state. Make all register 0.
+
+<li>
+Using a dissassembler to find anomalies
+
+</ul>
+
+<div id="UISFuzz"><h1 id="UISFuzz" class="header"><a href="#UISFuzz">UISFuzz</a></h1></div>
+
+<ul>
+<li>
+Using similar strategies as Sandsifter
+
+</ul>
+
+</body>
+</html>
