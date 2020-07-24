@@ -4,6 +4,7 @@
 <link rel="Stylesheet" type="text/css" href="style.css">
 <title>CMake</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -17,13 +18,14 @@ Create a build directory under the root of llvm-project then cd into it
 
 <li>
 Proceed with: <br>
-   cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS="clang"
-   -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon
-   -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang
+   cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DLLVM_ENABLE_PROJECTS="clang" \<br>
+   -DCMAKE_EXPORT_COMPILE_COMMANDS=On -DLLVM_TARGETS_TO_BUILD=Hexagon \<br>
+   -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang \<br>
    -DBUILD_SHARED_LIBS=True -DLLVM_CCACHE_BUILD=True -DLLVM_USE_SPLIT_DWARF=True
-   -DLLVM_USE_LINKER=lld
-   -DCMAKE_EXE_LINKER_FLAGS=-Wl,--gdb-index
-   -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--gdb-index
+   \<br>
+   -DLLVM_USE_LINKER=lld \<br>
+   -DCMAKE_EXE_LINKER_FLAGS=-Wl,--gdb-index \<br>
+   -DCMAKE_SHARED_LINKER_FLAGS=-Wl,--gdb-index \<br>
    ../llvm
 
 <li>
@@ -35,6 +37,12 @@ Run ninja in the terminal
 With all the time saving options turned on; one line of code change in
 HexagonAsmParser.cpp only takes about 36s to rebuild comparing to 20min without 
 using ninja and options listed below.
+</p>
+
+<div id="Optional"><h2 id="Optional" class="header"><a href="#Optional">Optional</a></h2></div>
+
+<p>
+-DLLVM_BUILD_INSTRUMENTED_COVERAGE=On
 </p>
 
 <div id="Useful options to reduce build time"><h2 id="Useful options to reduce build time" class="header"><a href="#Useful options to reduce build time">Useful options to reduce build time</a></h2></div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="style.css">
+<title>Coverage</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<ol>
+<li>
+Build llvm with coverage reporting enabled.
+   See: <a href="https://clang.llvm.org/docs/SourceBasedCodeCoverage.html#collecting-coverage-reports-for-the-llvm-project">https://clang.llvm.org/docs/SourceBasedCodeCoverage.html#collecting-coverage-reports-for-the-llvm-project</a>
+
+<li>
+Collect profiles by running tests. (llvm-lit llvm/test/MC/Hexagon)
+
+<li>
+Use prepare-code-coverage-artifact.py in "--only-merge" mode to merge
+   your profiles together.
+
+<ul>
+<li>
+lvm/utils/prepare-code-coverage-artifact.py build/bin/llvm-profdata
+     build/bin/llvm-cov
+     build/profiles/ 
+     html_report/ 
+     build/bin/clang 
+     --unified-report
+     --use-existing-profdata build/profiles/Coverage.profdata 
+     --restrict llvm/lib/Target/Hexagon/
+
+</ul>
+<li>
+Use prepare-code-coverage-artifact.py again to emit an html report,
+   passing in "--use-existing-profdata path/to/merged/profile".
+
+</ol>
+
+</body>
+</html>
