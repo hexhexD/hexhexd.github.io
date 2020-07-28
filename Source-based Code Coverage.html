@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="Stylesheet" type="text/css" href="style.css">
-<title>Coverage</title>
+<title>Source-based Code Coverage</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -26,7 +26,7 @@ lvm/utils/prepare-code-coverage-artifact.py build/bin/llvm-profdata
      build/bin/llvm-cov
      build/profiles/ 
      html_report/ 
-     build/bin/clang 
+     build/lib/libLLVMHexagon*
      --unified-report
      --use-existing-profdata build/profiles/Coverage.profdata 
      --restrict llvm/lib/Target/Hexagon/
